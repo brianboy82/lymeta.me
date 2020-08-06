@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const env = process.env.NODE_ENV || 'development';
 const finalCSSLoader = (env === 'production') ? MiniCssExtractPlugin.loader : { loader: 'style-loader' };
 const autoprefixer = require('autoprefixer');
@@ -7,19 +8,19 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   devServer: {
     hot: true,
-   },
+  },
   mode: env,
-  entry: ['./src'], 
-  devtool: 'source-map', 
+  entry: ['./src'],
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [ //here's the part you want
-        { loader: 'babel-loader',
-         loader: 'eslint-loader', }
-      ]
+        use: [ // here's the part you want
+          { loader: 'babel-loader' },
+          { loader: 'eslint-loader' },
+        ],
       },
       {
         test: /\.s?css/,
@@ -63,7 +64,7 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-    template: './src/index.html',
-    filename: './index.html',
-  }),],
-}
+      template: './src/index.html',
+      filename: './index.html',
+    })],
+};
